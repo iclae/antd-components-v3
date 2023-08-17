@@ -1,0 +1,78 @@
+.comment_component {
+  padding: 6px 12px 12px 12px;
+  .comment_area {
+    border-radius: 0;
+    &:hover,
+    &:focus {
+      box-shadow: none;
+    }
+  }
+  .editor {
+    :global(.ant-comment-avatar) {
+      display: none;
+    }
+
+    .comment_btn {
+      border-radius: 0;
+      margin-top: 12px;
+      float: right;
+    }
+  }
+  .list {
+    :global(.ant-btn-link) {
+      padding: 0 6px;
+    }
+    :global(.ant-comment-content-author) {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    :global(.ant-comment) {
+      border: 1px solid #ebedf0;
+      margin-top: 6px;
+      &:first-child {
+        margin-top: 0;
+      }
+    }
+    :global(.ant-comment-actions) {
+      float: right;
+    }
+    :global(.ant-comment-inner) {
+      padding-bottom: 8px;
+    }
+    .comment_more_menu {
+      z-index: 999;
+      :global(.ant-popover-inner-content) {
+        padding: 0;
+      }
+      :global(.ant-menu .ant-menu-item) {
+        margin-bottom: 0;
+        line-height: 30px;
+        height: 30px;
+      }
+    }
+    :global(.ant-comment-nested) {
+      padding-right: 6px;
+    }
+
+    .comment_quote {
+      background-color: #f0f0f0;
+      margin-bottom: 8px;
+    }
+
+    .replyWrapper {
+      margin-bottom: 10px;
+      .comment_area {
+        margin-bottom: 12px;
+      }
+      &::after {
+        content: '';
+        display: block;
+        clear: both;
+      }
+      .replyBtns {
+        float: right;
+      }
+    }
+  }
+}
