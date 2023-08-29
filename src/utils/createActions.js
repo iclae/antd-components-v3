@@ -1,6 +1,6 @@
 /* eslint-disable react/no-multi-comp */
 import React, { Fragment } from 'react';
-import { Divider, Popconfirm, Popover, Menu, Button } from 'antd';
+import { Divider, Popconfirm, Popover, Menu } from 'antd';
 
 /**
  * @typedef {Object} Action
@@ -18,9 +18,7 @@ import { Divider, Popconfirm, Popover, Menu, Button } from 'antd';
  * @returns {JSX.Element} <a></a>
  */
 const ActionLink = ({ action: { onClick = () => {}, text } }) => (
-  <Button type="link" onClick={onClick}>
-    {text}
-  </Button>
+  <a onClick={onClick}>{text}</a>
 );
 
 /**
@@ -38,7 +36,7 @@ const ActionPopconfirm = ({
     onConfirm={onClick}
     title={confirmTitle}
   >
-    <Button type="link">{text}</Button>
+    <a>{text}</a>
   </Popconfirm>
 );
 
@@ -65,7 +63,7 @@ const ActionMore = ({ action }) => {
       }
       trigger={moreTrigger}
     >
-      <Button type="link">{text}</Button>
+      <a>{text}</a>
     </Popover>
   );
 };
