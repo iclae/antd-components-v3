@@ -1,6 +1,6 @@
 /* eslint-disable react/no-multi-comp */
 import React, { Fragment } from 'react';
-import { Divider, Popconfirm, Popover, Menu } from 'antd';
+import { Divider, Popconfirm, Popover, Menu, Button } from 'antd';
 
 /**
  * @typedef {Object} Action
@@ -63,7 +63,9 @@ const ActionMore = ({ action }) => {
       }
       trigger={moreTrigger}
     >
-      <a>{text}</a>
+      <Button type="link" style={{ padding: 0 }}>
+        {text}
+      </Button>
     </Popover>
   );
 };
