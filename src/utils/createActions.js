@@ -6,10 +6,11 @@ import { Divider, Popconfirm, Popover, Menu, Button } from 'antd';
  * @typedef {Object} Action
  * @property {string} text  操作的标题
  * @property {Function} onClick  点击后的回调函数
- * @property {'normal' | 'confirm' | 'more'} [type] 操作的类型,默认为normal
+ * @property {'normal' | 'confirm' | 'more', 'custom'} [type] 操作的类型,默认为normal
  * @property {string} [confirmTitle] 弹出确认框的标题
  * @property {'click' | 'hover'} [moreTrigger] 弹出菜单的触发方式,默认为hover
  * @property {boolean} [hidden] 是否隐藏
+ * @property {disabled} [disabled] 是否禁用
  */
 
 /**
@@ -17,8 +18,15 @@ import { Divider, Popconfirm, Popover, Menu, Button } from 'antd';
  * @param {Action} action
  * @returns {JSX.Element} <a></a>
  */
-const ActionLink = ({ action: { onClick = () => {}, text } }) => (
-  <a onClick={onClick}>{text}</a>
+const ActionLink = ({ action: { onClick = () => {}, text, disabled } }) => (
+  <Button
+    type="link"
+    style={{ padding: 0 }}
+    onClick={onClick}
+    disabled={disabled}
+  >
+    {text}
+  </Button>
 );
 
 /**
@@ -28,7 +36,7 @@ const ActionLink = ({ action: { onClick = () => {}, text } }) => (
  * @returns {JSX.Element} <Popconfirm><a></a></Popconfirm>
  */
 const ActionPopconfirm = ({
-  action: { onClick = () => {}, text, confirmTitle },
+  action: { onClick = () => {}, text, confirmTitle, disabled },
 }) => (
   <Popconfirm
     cancelText="取消"
@@ -36,7 +44,9 @@ const ActionPopconfirm = ({
     onConfirm={onClick}
     title={confirmTitle}
   >
-    <a>{text}</a>
+    <Button type="link" style={{ padding: 0 }} disabled={disabled}>
+      {text}
+    </Button>
   </Popconfirm>
 );
 
@@ -45,11 +55,12 @@ const ActionPopconfirm = ({
  * @returns
  */
 const ActionMore = ({ action }) => {
-  const { moreTrigger = 'hover', text, menus = [] } = action;
+  const { moreTrigger = 'hover', text, menus = [], zIndex = 999 } = action;
 
   return (
     <Popover
       placement="top"
+      overlayStyle={{ zIndex }}
       content={
         <div className="folder-more-menu">
           <Menu>
@@ -86,6 +97,9 @@ const createActions = actions =>
           break;
         case 'more':
           Action = ActionMore;
+          break;
+        case 'custom':
+          Action = action.children;
           break;
         default:
           Action = ActionLink;
